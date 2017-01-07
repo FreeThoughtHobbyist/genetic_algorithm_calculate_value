@@ -1,5 +1,5 @@
+extern crate rand;
 mod genetic_string;
-
 
 #[cfg(test)]
 mod tests {
