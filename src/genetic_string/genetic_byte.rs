@@ -8,6 +8,15 @@ pub struct GeneticByte {
     byte_type: bool
 }
 
+trait GeneticByteTestUtilities{
+    fn new(byte_value: u8, byte_type: bool) -> GeneticByte;
+}
+
+impl GeneticByteTestUtilities for GeneticByte {
+    fn new(byte_value: u8, byte_type: bool) -> GeneticByte {
+        GeneticByte { value: byte_value, byte_type: byte_type}
+    }
+}
 
 impl GeneticByte {
     /// # Purpose
@@ -128,14 +137,6 @@ impl Clone for GeneticByte {
     }
 }
 
-/// # Purpose
-/// make the genetic byte displayable.
-///
-/// # Parameters
-/// Formatter - Used to determine the format of the string
-///
-/// # Returns
-/// The formatted string for display
 impl fmt::Display for GeneticByte {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if self.byte_type {
@@ -146,25 +147,27 @@ impl fmt::Display for GeneticByte {
     }
 }
 
-#[cfg(tests)]
+#[cfg(test)]
 mod tests{
     use super::*;
     #[test]
-    fn mutate_chages_1_byte() {
+    fn mutate_changes_1_byte() {
         let mut g_byte = GeneticByte::new(true);
-        let current_value = g_byte.get_value();
+        let start_value= g_byte.get_value() as i16;
         g_byte.mutate(true);
-        let new_value = g_byte.get_value();
-        let change_in_value: i16 = current_value - new_value;
+        let new_value = g_byte.get_value() as i16;
+        assert!(true, one_bit_changed(new_value, start_value))
 
     }
 
-    fn one_bit_changed(original_value: u8, new_value: u8) -> bool {
-        let change_in_value: i16 = original_value - new_value;
-        let number_bits_changed = 1;
+    fn one_bit_changed(original_value: i16, new_value: i16) -> bool {
+        let mut change_in_value = original_value - new_value;
+        let mut number_bits_changed = 0;
         while change_in_value != 0 {
-
+            number_bits_changed += change_in_value % 2;
+            change_in_value /= 2;
         }
+        number_bits_changed == 1
     }
 
 }
