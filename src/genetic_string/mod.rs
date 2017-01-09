@@ -7,11 +7,7 @@ pub struct GeneticString {
     vector: Vec<genetic_byte::GeneticByte>
 }
 
-trait GeneticStringTestUtilities {
-    fn new(Vec<genetic_byte::GeneticByte>) -> GeneticString;
-}
-
-impl GeneticStringTestUtilities for GeneticString {
+pub trait GeneticStringTestUtilities {
     /// # Purpose
     /// Create a genetic strings whose value can be precomputed. Used for testing purposes.
     ///
@@ -20,7 +16,11 @@ impl GeneticStringTestUtilities for GeneticString {
     ///
     /// # Returns
     /// a genetic string
-    fn new (g_byte_vec: Vec<genetic_byte::GeneticByte>) -> GeneticString {
+    fn new(Vec<genetic_byte::GeneticByte>) -> Self;
+}
+
+impl GeneticStringTestUtilities for GeneticString {
+    fn new (g_byte_vec: Vec<genetic_byte::GeneticByte>) -> Self{
         GeneticString{vector: g_byte_vec}
     }
 }
@@ -151,8 +151,10 @@ mod tests {
     #[test]
     fn single_byte_calculate_value_should_equal_23_when_byte_equal_23() {
         let mut g_string: GeneticString = build_single_item_gen_string();
-        assert!(23, GeneticString::calculate_value(&(g_string.get_vector())))
+        let vector = g_string.get_vector();
+        assert!(23 == GeneticString::calculate_value(&vector));
     }
+
     fn build_empty_genetic_string() {
 
     }
@@ -165,9 +167,9 @@ mod tests {
     /// # Return
     /// The genetic string
     fn build_single_item_gen_string() -> GeneticString {
-        let mut g_byte_1 = genetic_byte::GeneticByteTestUtilities::new(23, true);
+        let mut g_byte_1: genetic_byte::GeneticByte = genetic_byte::GeneticByteTestUtilities::new(23, true);
         let mut g_vec = vec![g_byte_1];
-        GeneticStringTestUtilities::new(g_vec);
+        GeneticStringTestUtilities::new(g_vec)
     }
 
     fn build_multi_item_gen_string() {

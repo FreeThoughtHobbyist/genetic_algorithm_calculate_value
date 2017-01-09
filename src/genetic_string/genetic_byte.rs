@@ -8,12 +8,12 @@ pub struct GeneticByte {
     byte_type: bool
 }
 
-trait GeneticByteTestUtilities{
-    fn new(byte_value: u8, byte_type: bool) -> GeneticByte;
+pub trait GeneticByteTestUtilities{
+    fn new(byte_value: u8, byte_type: bool) -> Self;
 }
 
 impl GeneticByteTestUtilities for GeneticByte {
-    fn new(byte_value: u8, byte_type: bool) -> GeneticByte {
+    fn new(byte_value: u8, byte_type: bool) -> Self{
         GeneticByte { value: byte_value, byte_type: byte_type}
     }
 }
