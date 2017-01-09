@@ -145,7 +145,7 @@ impl fmt::Display for GeneticString {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use super::genetic_byte::*;
+    use super::genetic_byte;
 
 
     #[test]
@@ -164,7 +164,7 @@ mod tests {
     ///
     /// # Return
     /// The genetic string
-    fn build_single_item_gen_string(){
+    fn build_single_item_gen_string() -> GeneticString {
         let mut g_byte_1 = genetic_byte::GeneticByteTestUtilities::new(23, true);
         let mut g_vec = vec![g_byte_1];
         GeneticStringTestUtilities::new(g_vec);
