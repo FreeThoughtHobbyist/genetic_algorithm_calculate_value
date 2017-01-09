@@ -145,5 +145,39 @@ impl fmt::Display for GeneticString {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use genetic_byte::*;
+
+
+    #[test]
+    fn single_byte_calculate_value_should_equal_23_when_byte_equal_23() {
+        let mut g_string: GeneticString = build_single_item_gen_string();
+        assert!(23, GeneticString::calculate_value(&(g_string.get_vector())))
+    }
+    fn build_empty_genetic_string() {
+
+    }
+
+    /// # Purpose
+    /// Build a genetic string 1 byte long with a precomputed value
+    ///
+    /// # Parameters
+    ///
+    /// # Return
+    /// The genetic string
+    fn build_single_item_gen_string(){
+        let mut g_byte_1 = genetic_byte::GeneticByteTestUtilities::new(23, true);
+        let mut g_vec = vec![g_byte_1];
+        GeneticStringTestUtilities::new(g_vec);
+    }
+
+    fn build_multi_item_gen_string() {
+
+    }
+
+    fn build_bad_multi_item_genetic_string() {
+
+    }
+
+
 
 }
