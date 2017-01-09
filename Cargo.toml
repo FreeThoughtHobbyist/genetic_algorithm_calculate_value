@@ -1,0 +1,7 @@
+[package]
+name = "genetic_algorithm"
+version = "0.1.0"
+authors = ["Benjamin Boudra <benboudra@gmail.com>"]
+
+[dependencies]
+rand= "*"
