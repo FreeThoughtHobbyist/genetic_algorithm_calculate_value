@@ -145,7 +145,7 @@ impl fmt::Display for GeneticString {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use genetic_byte::*;
+    use super::genetic_byte::*;
 
 
     #[test]
